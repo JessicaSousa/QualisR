@@ -1,0 +1,66 @@
+---
+title: "QualisR: Acesso as tabelas dos qualis de computação via R"
+author: "Jessica Cardoso"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+[![Travis-CI Build Status](https://travis-ci.org/JessicaSousa/QualisR.svg?branch=master)](https://travis-ci.org/JessicaSousa/QualisR)
+
+
+O presente pacote permite que você acesse as tabelas dos qualis na área de computação do site http://qualis.ic.ufmt.br/, via R. Você pode pode selecionar ser deseja obter todas as tabelas do site ou apenas algumas, relacioná-las e fazer as operações que desejar por si mesmo.
+
+O pacote `QualisR` é desenvolvido utilizando o controle de versão do Github. Então você pode fazer download dele utilizando o pacote `devtools`:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("JessicaSousa/QualisR")
+```
+
+## Explorando o pacote
+
+Primeiramente, no site de onde essas informações foram tiradas, as tabelas possuem seus ids `tb-conferencias`, `tb-periodicos`, `tb-todos`, ao acessar uma tabela específica devemos informar um desses três ids.
+
+```{r}
+conferencias <- QualisR::GetTable(id_table = 'tb-conferencias')
+#head(conferencias, 5)
+```
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(head(conferencias, 5))
+```
+
+Das conferências, como sabemos qual é o qualis mais predominante? Podemos visualizar isso através do `ggplot2` facilmente. Então, pelo gráfico podemos chegar a conclusão que existem mais conferências B1.
+
+```{r fig.width=7, fig.height=3}
+library(ggplot2)
+ggplot(conferencias, aes(`Extrato CAPES`, fill = `Extrato CAPES` ) ) +
+  geom_bar()
+```
+
+## Exemplos
+
+Suponha a situação que estejamos interessados apenas em encontrar as conferências e periódicos que estejam relacionadas a algumas áreas de inteligência artificial como *machine learning* e *data mining*, por exemplo. 
+
+```{r}
+
+areas <- 'machine learning|data mining'
+conferencias <- QualisR::GetTable(id_table = 'tb-conferencias')
+periodicos <- QualisR::GetTable(id_table = 'tb-periodicos')
+
+confs <- dplyr::filter(conferencias, grepl(areas, Conferência, ignore.case = TRUE))[,2:3]
+peris <- dplyr::filter(periodicos, grepl(areas, Periódico, ignore.case = TRUE))[,2:3]
+
+```
+
+Com isso temos como resultado as conferências e periódicos que estão relacionadas a *machine learning* ou *data mining*.
+
+```{r, echo=FALSE, results='asis'}
+
+knitr::kable(list(head(confs, 7), head(peris, 7)))
+```
+
