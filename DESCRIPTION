@@ -1,26 +1,24 @@
 Package: QualisR
-Type: Package
-Title: Tabela de qualis na area de computação
+Title: Tabela de periódicos do Sucupira
 Version: 0.0.0.9000
-Author: Jessica Cardoso
-Maintainer: Jessica Cardoso <jessicardosops@gmail.com>
-Description: Obtém a lista atualizada de tabelas de qualis de computação
-    do site da UFMT <http://qualis.ic.ufmt.br>. 
-    Os dados extraídos correspondem aos dados presentes nas três abas do
-    site: periódicos, conferências e correlação com outras áreas.
+Authors@R: person("Jessica", "Cardoso", email = "jessicacardosops@gmail.com", 
+    role = c("aut", "cre"))
+Description: Permite a recuperação das tabelas de periódicos,
+    presentes do site Sucupira (http://sucupira.capes.gov.br)
+    através do nome da área do periódico.
 Depends: R (>= 3.4.2)
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
-Imports: purrr,
-    rjson,
+Imports: xml2,
     rvest,
-    stringi,
-    stringr,
-    xml2,
-    magrittr
+    glue,
+    magrittr,
+    httr,
+    dplyr,
+    readr,
+    purrr
+RoxygenNote: 6.0.1
 Suggests: knitr,
-    rmarkdown,
-    ggplot2,
-    dplyr
+    rmarkdown
+VignetteBuilder: knitr

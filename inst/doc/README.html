@@ -12,9 +12,9 @@
 
 <meta name="author" content="Jessica Cardoso" />
 
-<meta name="date" content="2017-11-19" />
+<meta name="date" content="2017-12-03" />
 
-<title>QualisR: Acesso as tabelas dos qualis de computação via R</title>
+<title>QualisR: Acesso as tabelas dos qualis via R</title>
 
 
 
@@ -68,157 +68,199 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<h1 class="title toc-ignore">QualisR: Acesso as tabelas dos qualis de computação via R</h1>
+<h1 class="title toc-ignore">QualisR: Acesso as tabelas dos qualis via R</h1>
 <h4 class="author"><em>Jessica Cardoso</em></h4>
-<h4 class="date"><em>2017-11-19</em></h4>
+<h4 class="date"><em>2017-12-03</em></h4>
 
 
 
-<p><a href="https://travis-ci.org/JessicaSousa/QualisR"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5OCIgaGVpZ2h0PSIyMCI+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4Mj0iMCIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2JiYiIgc3RvcC1vcGFjaXR5PSIuMSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1vcGFjaXR5PSIuMSIvPjwvbGluZWFyR3JhZGllbnQ+PHJlY3Qgcng9IjMiIHdpZHRoPSI5OCIgaGVpZ2h0PSIyMCIgZmlsbD0iIzU1NSIvPjxyZWN0IHJ4PSIzIiB4PSIzNyIgd2lkdGg9IjYxIiBoZWlnaHQ9IjIwIiBmaWxsPSIjOWY5ZjlmIi8+PHBhdGggZmlsbD0iIzlmOWY5ZiIgZD0iTTM3IDBoNHYyMGgtNHoiLz48cmVjdCByeD0iMyIgd2lkdGg9Ijk4IiBoZWlnaHQ9IjIwIiBmaWxsPSJ1cmwoI2EpIi8+PGcgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkRlamFWdSBTYW5zLFZlcmRhbmEsR2VuZXZhLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiPjx0ZXh0IHg9IjE5LjUiIHk9IjE1IiBmaWxsPSIjMDEwMTAxIiBmaWxsLW9wYWNpdHk9Ii4zIj5idWlsZDwvdGV4dD48dGV4dCB4PSIxOS41IiB5PSIxNCI+YnVpbGQ8L3RleHQ+PHRleHQgeD0iNjYuNSIgeT0iMTUiIGZpbGw9IiMwMTAxMDEiIGZpbGwtb3BhY2l0eT0iLjMiPnVua25vd248L3RleHQ+PHRleHQgeD0iNjYuNSIgeT0iMTQiPnVua25vd248L3RleHQ+PC9nPjwvc3ZnPg==" alt="Travis-CI Build Status" /></a></p>
-<p>O presente pacote permite que você acesse as tabelas dos qualis na área de computação do site <a href="http://qualis.ic.ufmt.br/" class="uri">http://qualis.ic.ufmt.br/</a>, via R. Você pode pode selecionar ser deseja obter todas as tabelas do site ou apenas algumas, relacioná-las e fazer as operações que desejar por si mesmo.</p>
+<p>O presente pacote permite que você acesse as tabelas dos qualis de acordo com área e classificação do evento diretamente do site do Sucupira, via R. Você pode pode selecionar se deseja obter todas as tabelas do site (processo demorado) ou apenas algumas, relacioná-las e fazer as operações que desejar.</p>
 <p>O pacote <code>QualisR</code> é desenvolvido utilizando o controle de versão do Github. Então você pode fazer download dele utilizando o pacote <code>devtools</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&quot;devtools&quot;)</span>
 devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;JessicaSousa/QualisR&quot;</span>)</code></pre></div>
-<div id="explorando-o-pacote" class="section level2">
-<h2>Explorando o pacote</h2>
-<p>Primeiramente, no site de onde essas informações foram tiradas, as tabelas possuem seus ids <code>tb-conferencias</code>, <code>tb-periodicos</code>, <code>tb-todos</code>, ao acessar uma tabela específica devemos informar um desses três ids.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">conferencias &lt;-<span class="st"> </span>QualisR<span class="op">::</span><span class="kw">GetTable</span>(<span class="dt">id_table =</span> <span class="st">'tb-conferencias'</span>)
-<span class="co">#head(conferencias, 5)</span></code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Siglas</th>
-<th align="left">Conferência</th>
-<th align="left">Extrato CAPES</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">AAAI</td>
-<td align="left">AAAI - Conference on Artificial Intelligence</td>
-<td align="left">A1</td>
-</tr>
-<tr class="even">
-<td align="left">AAMAS</td>
-<td align="left">AAMAS - International Conference on Autonomous Agents and Multiagent Systems</td>
-<td align="left">A1</td>
-</tr>
-<tr class="odd">
-<td align="left">ACL</td>
-<td align="left">ACL - Annual Meeting of the Association for Computational Linguistics</td>
-<td align="left">A1</td>
-</tr>
-<tr class="even">
-<td align="left">ACMSOCC</td>
-<td align="left">SoCC - ACM Symposium on Cloud Computing</td>
-<td align="left">A1</td>
-</tr>
-<tr class="odd">
-<td align="left">ALLERTON</td>
-<td align="left">ALLERTON - Allerton Conference on Communication, Control, and Computing</td>
-<td align="left">A1</td>
-</tr>
-</tbody>
-</table>
-<p>Das conferências, como sabemos qual é o qualis mais predominante? Podemos visualizar isso através do <code>ggplot2</code> facilmente. Então, pelo gráfico podemos chegar a conclusão que existem mais conferências B1.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
-<span class="kw">ggplot</span>(conferencias, <span class="kw">aes</span>(<span class="st">`</span><span class="dt">Extrato CAPES</span><span class="st">`</span>, <span class="dt">fill =</span> <span class="st">`</span><span class="dt">Extrato CAPES</span><span class="st">`</span> ) ) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_bar</span>()</code></pre></div>
-<p><img src="data:image/png;base64,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" /><!-- --></p>
-</div>
-<div id="exemplos" class="section level2">
-<h2>Exemplos</h2>
-<p>Suponha a situação que estejamos interessados apenas em encontrar as conferências e periódicos que estejam relacionadas a algumas áreas de inteligência artificial como <em>machine learning</em> e <em>data mining</em>, por exemplo.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">areas &lt;-<span class="st"> 'machine learning|data mining'</span>
-conferencias &lt;-<span class="st"> </span>QualisR<span class="op">::</span><span class="kw">GetTable</span>(<span class="dt">id_table =</span> <span class="st">'tb-conferencias'</span>)
-periodicos &lt;-<span class="st"> </span>QualisR<span class="op">::</span><span class="kw">GetTable</span>(<span class="dt">id_table =</span> <span class="st">'tb-periodicos'</span>)
+<div id="explorando-as-funcoes-do-pacote" class="section level2">
+<h2>Explorando as funções do pacote</h2>
+<p>O pacote possui três funções <code>get_qualis_table</code> que retorna a tabela dos qualis de acordo com o evento e área, a função <code>get_options</code> que retorna as opções do menu de seleção e <code>get_sucupira_page</code> que realiza <code>GET</code> na página do Sucupira.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Realiza Get na página do Sucupira</span>
+sucupira_get &lt;-<span class="st"> </span>QualisR<span class="op">::</span><span class="kw">get_sucupira_page</span>()
+<span class="kw">print</span>(sucupira_get<span class="op">$</span>status_code)</code></pre></div>
+<pre><code>## [1] 200</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Obter a tabela de periódicos de computação no triênio 2010-2012</span>
+tabela_computacao &lt;-<span class="st"> </span>QualisR<span class="op">::</span><span class="kw">get_qualis_table</span>(sucupira_get, <span class="dt">area =</span> <span class="st">'computação'</span>, <span class="dt">event =</span> <span class="st">'triênio 2010-2012'</span>)
 
-confs &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(conferencias, <span class="kw">grepl</span>(areas, Conferência, <span class="dt">ignore.case =</span> <span class="ot">TRUE</span>))[,<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]
-peris &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(periodicos, <span class="kw">grepl</span>(areas, Periódico, <span class="dt">ignore.case =</span> <span class="ot">TRUE</span>))[,<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]</code></pre></div>
-<p>Com isso temos como resultado as conferências e periódicos que estão relacionadas a <em>machine learning</em> ou <em>data mining</em>.</p>
-<table class="kable_wrapper">
-<tbody>
-<tr>
-<td>
+<span class="kw">head</span>(tabela_computacao[<span class="kw">order</span>(tabela_computacao<span class="op">$</span>Estrato), ])</code></pre></div>
+<pre><code>##          ISSN                                           Título Estrato
+## 4   0360-0300                            ACM Computing Surveys      A1
+## 16  0730-0301                     ACM Transactions on Graphics      A1
+## 66  1748-7188                 Algorithms for Molecular Biology      A1
+## 125 1134-3060 Archives of Computational Methods in Engineering      A1
+## 137 0004-3702            Artificial Intelligence (General Ed.)      A1
+## 147 0005-1098                              Automatica (Oxford)      A1</code></pre>
+</div>
+<div id="exemplo-1---obtendo-campos-do-formulario" class="section level2">
+<h2>Exemplo 1 - Obtendo campos do formulário</h2>
+<p>Primeiramente, no site do sucupira temos alguns menus de opções, o que permite que busquemos por área, estrato ou por título por exemplo. Primeiramente vamos descobrir o nome de cada um desses menus de opções com a ajuda do pacote rvest. A área onde se encontra os campos da busca personalizada do Sucupira estão dentro do nó cuja classe é <code>form-group</code> (Isso pode ser visto através da inspeção do elemento através de um navegador).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(magrittr)
+
+url &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;https://sucupira.capes.gov.br/&quot;</span>,
+               <span class="st">&quot;sucupira/public/consultas/coleta/&quot;</span>,
+               <span class="st">&quot;veiculoPublicacaoQualis/&quot;</span>,
+               <span class="st">&quot;listaConsultaGeralPeriodicos.jsf&quot;</span>,
+               <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+sucupira_session &lt;-<span class="st"> </span>rvest<span class="op">::</span><span class="kw">html_session</span>(url)
+<span class="co">#Obter a região do html correspondente ao formulário de busca</span>
+formulario &lt;-<span class="st"> </span>sucupira_session <span class="op">%&gt;%</span><span class="st"> </span>xml2<span class="op">::</span><span class="kw">read_html</span>() <span class="op">%&gt;%</span><span class="st"> </span>rvest<span class="op">::</span><span class="kw">html_nodes</span>(<span class="st">'.form-group'</span>)
+
+campo &lt;-<span class="st"> </span>formulario <span class="op">%&gt;%</span><span class="st"> </span>rvest<span class="op">::</span><span class="kw">html_nodes</span>(<span class="st">'label'</span>) <span class="op">%&gt;%</span><span class="st"> </span>rvest<span class="op">::</span><span class="kw">html_text</span>()
+nomes &lt;-<span class="st"> </span>formulario <span class="op">%&gt;%</span><span class="st">  </span>rvest<span class="op">::</span><span class="kw">html_nodes</span>(<span class="st">'.form-control'</span>) <span class="op">%&gt;%</span><span class="st"> </span>rvest<span class="op">::</span><span class="kw">html_attr</span>(<span class="st">'name'</span>)</code></pre></div>
 <table>
+<caption>Nomes dos nós do formulário</caption>
 <thead>
 <tr class="header">
-<th align="left">Conferência</th>
-<th align="left">Extrato CAPES</th>
+<th align="left">campo</th>
+<th align="left">nomes</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">ECML/PKDD - European Conference on Machine Learning and Principles and Practice of Knowledge Discovery in Databases</td>
-<td align="left">A1</td>
+<td align="left">Evento de Classificação:</td>
+<td align="left">form:evento</td>
 </tr>
 <tr class="even">
-<td align="left">ICDM - IEEE International Conference on Data Mining</td>
-<td align="left">A1</td>
+<td align="left">Área de Avaliação:</td>
+<td align="left">form:area</td>
 </tr>
 <tr class="odd">
-<td align="left">ICML - International Conference on Machine Learning</td>
-<td align="left">A1</td>
+<td align="left">ISSN:</td>
+<td align="left">form:issn:issn</td>
 </tr>
 <tr class="even">
-<td align="left">KDD - ACM SIGKDD Conference on Knowledge Discovery and Data Mining</td>
-<td align="left">A1</td>
+<td align="left">Título:</td>
+<td align="left">form:j_idt52</td>
 </tr>
 <tr class="odd">
-<td align="left">SDM - SIAM International Conference on Data Mining</td>
-<td align="left">A1</td>
-</tr>
-<tr class="even">
-<td align="left">WSDM - ACM Conference International Conference on Web Search and Data Mining</td>
-<td align="left">A1</td>
-</tr>
-<tr class="odd">
-<td align="left">EDM - International Conference on Educational Data Mining</td>
-<td align="left">A2</td>
+<td align="left">Classificação:</td>
+<td align="left">form:estrato</td>
 </tr>
 </tbody>
 </table>
-</td>
-<td>
+<p>Acessando o site do Sucupira vemos que há alguns campos que permitem a seleção de itens, são eles <strong>Evento de Classificação:</strong>, <strong>Área de Avaliação:</strong> e <strong>Classificação:</strong>. A função <code>QualisR::get_options</code> permite que tenhamos acesso as opções desses respectivos menus ao passar o nome do nó o qual esse se encontra. Essa função recebe como argumento um resultado do <code>rvest::GET</code> do site do Sucupira e uma string representando o nome nó. A seguir vamos obter as opções para o campo de <strong>Classificação:</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#ATENÇÃO, é para colocar o nome de acordo com o nome do nó (após o form:)</span>
+options &lt;-<span class="st"> </span>QualisR<span class="op">::</span><span class="kw">get_options</span>(<span class="dt">request =</span> sucupira_get, <span class="dt">form =</span> <span class="st">'estrato'</span>)</code></pre></div>
+<p>Assim, obtemos a lista de opções e seus respectivos valores utilizados no processo de submissão do formulário. O resultado da operação anterior pode ser visto a seguir. Para obter as opções dos outros campos basta seguir os mesmos passos.</p>
 <table>
+<caption>Lista de Estratos</caption>
 <thead>
 <tr class="header">
-<th align="left">Periódico</th>
-<th align="left">Extrato CAPES</th>
+<th align="left">value</th>
+<th align="left">name</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">BIODATA MINING</td>
+<td align="left">21</td>
+<td align="left">A1</td>
+</tr>
+<tr class="even">
+<td align="left">22</td>
 <td align="left">A2</td>
 </tr>
-<tr class="even">
-<td align="left">DATA MINING AND KNOWLEDGE DISCOVERY</td>
-<td align="left">A1</td>
-</tr>
 <tr class="odd">
-<td align="left">DATA MINING AND KNOWLEDGE DISCOVERY (DORDRECHT. ONLINE)</td>
-<td align="left">A1</td>
-</tr>
-<tr class="even">
-<td align="left">INTERNATIONAL JOURNAL OF BUSINESS INTELLIGENCE AND DATA MINING</td>
+<td align="left">23</td>
 <td align="left">B1</td>
 </tr>
-<tr class="odd">
-<td align="left">INTERNATIONAL JOURNAL OF DATA MINING, MODELLING AND MANAGEMENT</td>
+<tr class="even">
+<td align="left">24</td>
 <td align="left">B2</td>
 </tr>
+<tr class="odd">
+<td align="left">25</td>
+<td align="left">B3</td>
+</tr>
 <tr class="even">
-<td align="left">MACHINE LEARNING</td>
-<td align="left">A1</td>
+<td align="left">26</td>
+<td align="left">B4</td>
 </tr>
 <tr class="odd">
-<td align="left">MACHINE LEARNING (DORDRECHT. ONLINE)</td>
-<td align="left">A1</td>
+<td align="left">27</td>
+<td align="left">B5</td>
+</tr>
+<tr class="even">
+<td align="left">28</td>
+<td align="left">C</td>
 </tr>
 </tbody>
 </table>
-</td>
+</div>
+<div id="exemplo-2---fazendo-uma-busca-no-site-do-sucupira" class="section level2">
+<h2>Exemplo 2 - Fazendo uma busca no site do Sucupira</h2>
+<p>Para realizar uma busca no site, precisamos primeiramente conhecer seus campos. No exemplo anterior obtemos o nome desse campos. Vamos novamente ao <code>httr</code>. Eu quero pesquisar pelo <em>Journal of Statistical Software</em> selecionando o evento de classificação de periódicos do quadriênio de 2013-2016.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">evento.op &lt;-<span class="st"> </span>QualisR<span class="op">::</span><span class="kw">get_options</span>(<span class="dt">request =</span> sucupira_get, <span class="dt">form =</span> <span class="st">'evento'</span>)
+
+<span class="co">#Valor do campo do envento que corresponde ao quadriênio</span>
+evento.valor &lt;-<span class="st"> </span>evento.op<span class="op">$</span>value[<span class="dv">1</span>]
+
+<span class="co">#Obter ViewState da Página do Sucupira</span>
+  viewstate &lt;-<span class="st"> </span>sucupira_get <span class="op">%&gt;%</span><span class="st"> </span>xml2<span class="op">::</span><span class="kw">read_html</span>() <span class="op">%&gt;%</span>
+<span class="st">    </span>rvest<span class="op">::</span><span class="kw">html_node</span>(<span class="dt">xpath =</span> <span class="st">&quot;//*[@id=</span><span class="ch">\&quot;</span><span class="st">javax.faces.ViewState</span><span class="ch">\&quot;</span><span class="st">]&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span>rvest<span class="op">::</span><span class="kw">html_attr</span>(<span class="st">&quot;value&quot;</span>)
+
+parametros &lt;-<span class="st"> </span><span class="kw">list</span>(
+  <span class="st">'form'</span> =<span class="st"> 'form'</span>,
+  <span class="st">'form:evento'</span>=<span class="st"> </span>evento.valor,
+  <span class="st">'form:area'</span> =<span class="st"> ''</span>,
+  <span class="st">'form:issn:issn'</span> =<span class="st">''</span>, 
+  <span class="st">'form:checkTitulo'</span> =<span class="st"> </span><span class="ot">TRUE</span>,
+  <span class="st">'form:j_idt52'</span> =<span class="st"> 'Journal of Statistical Software'</span>,
+  <span class="st">'form:estrato'</span> =<span class="st"> ''</span>,
+  <span class="st">'form:consultar'</span> =<span class="st"> 'Consultar'</span>,
+  <span class="st">'javax.faces.ViewState'</span> =<span class="st"> </span>viewstate
+)
+
+resultado &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">POST</span>(url, <span class="dt">body =</span> parametros)
+pagina &lt;-<span class="st"> </span>resultado <span class="op">%&gt;%</span><span class="st"> </span>httr<span class="op">::</span><span class="kw">content</span>(<span class="st">'text'</span>) <span class="op">%&gt;%</span><span class="st"> </span>xml2<span class="op">::</span><span class="kw">read_html</span>() 
+tabela &lt;-<span class="st"> </span>pagina <span class="op">%&gt;%</span><span class="st"> </span>rvest<span class="op">::</span><span class="kw">html_table</span>() <span class="op">%&gt;%</span><span class="st"> </span>.[[<span class="dv">1</span>]]</code></pre></div>
+<p>Como resultado da busca pelo pelo periódico, obtemos a tabela a seguir com 5 linhas.</p>
+<table>
+<caption>Resultado da busca do periódico</caption>
+<thead>
+<tr class="header">
+<th align="left">ISSN</th>
+<th align="left">Título</th>
+<th align="left">Área de Avaliação</th>
+<th align="left">Classificação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1548-7660</td>
+<td align="left">JOURNAL OF STATISTICAL SOFTWARE</td>
+<td align="left">CIÊNCIA DA COMPUTAÇÃO</td>
+<td align="left">A1</td>
+</tr>
+<tr class="even">
+<td align="left">1548-7660</td>
+<td align="left">JOURNAL OF STATISTICAL SOFTWARE</td>
+<td align="left">CIÊNCIA POLÍTICA E RELAÇÕES INTERNACIONAIS</td>
+<td align="left">A2</td>
+</tr>
+<tr class="odd">
+<td align="left">1548-7660</td>
+<td align="left">JOURNAL OF STATISTICAL SOFTWARE</td>
+<td align="left">ENGENHARIAS I</td>
+<td align="left">B1</td>
+</tr>
+<tr class="even">
+<td align="left">1548-7660</td>
+<td align="left">JOURNAL OF STATISTICAL SOFTWARE</td>
+<td align="left">ENGENHARIAS III</td>
+<td align="left">A1</td>
+</tr>
+<tr class="odd">
+<td align="left">1548-7660</td>
+<td align="left">JOURNAL OF STATISTICAL SOFTWARE</td>
+<td align="left">MATEMÁTICA / PROBABILIDADE E ESTATÍSTICA</td>
+<td align="left">B1</td>
 </tr>
 </tbody>
 </table>
