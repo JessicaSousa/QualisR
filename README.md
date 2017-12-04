@@ -9,16 +9,16 @@ O pacote `SucupiraR` é desenvolvido utilizando o controle de versão do Github.
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("JessicaSousa/SucupiraR")
+devtools::install_github("JessicaSousa/QualisR")
 ```
 
 ### Exemplo
 
-A função `SucupiraR::get_all_tables` permite que você obtenham várias tabelas do site do Sucupira, use com moderação :)
+A função `QualisR::get_all_tables` permite que você obtenham várias tabelas do site do Sucupira, use com moderação :)
 
 ```{r}
 #Realiza Get na página do Sucupira
-sucupira_get <- SucupiraR::get_sucupira_page()
+sucupira_get <- QualisR::get_sucupira_page()
 print(sucupira_get$status_code)
 
 #Obtém as tabelas de periódicos dos quatro primeiros cursos no triênio 2010-2012
@@ -28,4 +28,4 @@ head(tabelas$ARTES)
 ```
 
 #### Outros exemplos
-Veja mais coisas que você pode fazer no [Tutorial](https://jessicasousa.github.io/SucupiraR/inst/doc/README.html)
+Veja mais coisas que você pode fazer no [Tutorial](https://jessicasousa.github.io/QualisR/inst/doc/README.html)
