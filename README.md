@@ -28,4 +28,4 @@ head(tabelas$ARTES)
 ```
 
 #### Outros exemplos
-Veja mais coisas que você pode fazer no [Tutorial](https://jessicasousa.github.io/SucupiraR/inst/doc/QualisR.html)
+Veja mais coisas que você pode fazer no [Tutorial](https://jessicasousa.github.io/SucupiraR/inst/doc/README.html)
