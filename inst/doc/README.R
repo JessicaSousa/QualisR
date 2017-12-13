@@ -1,10 +1,10 @@
 ## ------------------------------------------------------------------------
-#Realiza Get na p√°gina do Sucupira
+#Realiza Get na p·gina do Sucupira
 sucupira_get <- QualisR::get_sucupira_page()
 print(sucupira_get$status_code)
 
-#Obter a tabela de peri√≥dicos de computa√ß√£o no tri√™nio 2010-2012
-tabela_computacao <- QualisR::get_qualis_table(sucupira_get, area = 'computa√ß√£o', event = 'tri√™nio 2010-2012')
+#Obter a tabela de periÛdicos de computaÁ„o no triÍnio 2010-2012
+tabela_computacao <- QualisR::get_qualis_table(sucupira_get, area = 'computaÁ„o', event = 'triÍnio 2010-2012')
 
 head(tabela_computacao[order(tabela_computacao$Estrato), ])
 
@@ -17,7 +17,7 @@ url <- paste("https://sucupira.capes.gov.br/",
                "listaConsultaGeralPeriodicos.jsf",
                sep = "")
 sucupira_session <- rvest::html_session(url)
-#Obter a regi√£o do html correspondente ao formul√°rio de busca
+#Obter a regi„o do html correspondente ao formul·rio de busca
 formulario <- sucupira_session %>% xml2::read_html() %>% rvest::html_nodes('.form-group')
 
 campo <- formulario %>% rvest::html_nodes('label') %>% rvest::html_text()
@@ -29,10 +29,10 @@ nomes <- formulario %>%  rvest::html_nodes('.form-control') %>% rvest::html_attr
 labels <- gsub("[\r\n]", "", campo)
 campos <- data.frame(campo = labels, nomes = nomes)
 
-knitr::kable(campos, caption = 'Nomes dos n√≥s do formul√°rio')
+knitr::kable(campos, caption = 'Nomes dos nÛs do formul·rio')
 
 ## ------------------------------------------------------------------------
-#ATEN√á√ÉO, √© para colocar o nome de acordo com o nome do n√≥ (ap√≥s o form:)
+#ATEN«√O, È para colocar o nome de acordo com o nome do nÛ (apÛs o form:)
 options <- QualisR::get_options(request = sucupira_get, form = 'estrato')
 
 ## ---- echo=FALSE, results='asis'-----------------------------------------
@@ -42,10 +42,10 @@ knitr::kable(options, caption = 'Lista de Estratos', row.names = FALSE)
 
 evento.op <- QualisR::get_options(request = sucupira_get, form = 'evento')
 
-#Valor do campo do envento que corresponde ao quadri√™nio
+#Valor do campo do envento que corresponde ao quadriÍnio
 evento.valor <- evento.op$value[1]
 
-#Obter ViewState da P√°gina do Sucupira
+#Obter ViewState da P·gina do Sucupira
   viewstate <- sucupira_get %>% xml2::read_html() %>%
     rvest::html_node(xpath = "//*[@id=\"javax.faces.ViewState\"]") %>%
     rvest::html_attr("value")
@@ -67,5 +67,5 @@ pagina <- resultado %>% httr::content('text') %>% xml2::read_html()
 tabela <- pagina %>% rvest::html_table() %>% .[[1]]
 
 ## ---- echo=FALSE, results='asis'-----------------------------------------
-knitr::kable(tabela, caption = 'Resultado da busca do peri√≥dico', row.names = FALSE)
+knitr::kable(tabela, caption = 'Resultado da busca do periÛdico', row.names = FALSE)
 

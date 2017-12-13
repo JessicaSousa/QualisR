@@ -14,17 +14,17 @@ devtools::install_github("JessicaSousa/QualisR")
 
 ### Exemplo
 
-A função `QualisR::get_all_tables` permite que você obtenham várias tabelas do site do Sucupira, use com moderação :)
+A função `QualisR::get_qualis_table` permite que você obtenha a tabela do site do Sucupira com o qualis de todos os cursos, caso não passe o argumento área
 
 ```{r}
 #Realiza Get na página do Sucupira
 sucupira_get <- QualisR::get_sucupira_page()
 print(sucupira_get$status_code)
 
-#Obtém as tabelas de periódicos dos quatro primeiros cursos no triênio 2010-2012
-tabelas <- QualisR::get_all_tables(sucupira_get,num_tables = 4, event = 'triênio 2010-2012')
+#Obtém a tabela de periódicos dos cursos no triênio 2010-2012
+tabela <- QualisR::get_qualis_table(sucupira_get, event = '2010-2012')
 
-head(tabelas$ARTES)
+head(tabela)
 ```
 
 #### Outros exemplos

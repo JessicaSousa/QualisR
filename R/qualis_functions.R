@@ -45,7 +45,6 @@ get_sucupira_page <- function(){
 #' @param request refere-se o objeto gerado pela função \code{get_sucupira_page}
 #' @param form refere-se ao nome do formulário do menu presente no HTML do sucupira,
 #' algumas opções são: evento, area e estrato
-#' @param
 #' @export
 #' @examples
 #' \dontrun{

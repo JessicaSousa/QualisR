@@ -16,8 +16,7 @@ Imports: xml2,
     magrittr,
     httr,
     dplyr,
-    readr,
-    purrr
+    readr
 RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown

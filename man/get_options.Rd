@@ -20,9 +20,11 @@ Obtém a lista de opções de cada menu do formulário do site
 do Sucupira
 }
 \examples{
+\dontrun{
 sucupira_pg <- get_sucupira_page()
 evento_op <- get_options(request = sucupira_pg, form = 'evento')
 print(evento_op)
 area_op <- get_options(request = sucupira_pg, form = 'area')
 print(head(area_op))
+}
 }

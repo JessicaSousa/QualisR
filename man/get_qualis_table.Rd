@@ -4,7 +4,7 @@
 \alias{get_qualis_table}
 \title{get_qualis_table}
 \usage{
-get_qualis_table(sucupira_get, area = "computa", event = "2013-2016")
+get_qualis_table(sucupira_get, area = "", event = "2013-2016")
 }
 \arguments{
 \item{sucupira_get}{refere-se o objeto gerado pela função \code{get_sucupira_page}}
@@ -22,9 +22,11 @@ Obtém a tabela com o nome dos periódicos de acordo com a classificação do
 evento e a área desejada
 }
 \examples{
+
 sucupira_pg <- get_sucupira_page()
-computacao_tb <- get_qualis_table(sucupira_pg)
-print(head(computacao_tb))
+todos_cursos_tb <- get_qualis_table(sucupira_pg)
+print(head(todos_cursos_tb))
 estatistica_tb <- get_qualis_table(sucupira_get = sucupira_pg, area = 'estatística')
 print(head(estatistica_tb))
+
 }
