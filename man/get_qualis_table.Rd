@@ -29,4 +29,5 @@ print(head(todos_cursos_tb))
 estatistica_tb <- get_qualis_table(sucupira_get = sucupira_pg, area = 'estatística')
 print(head(estatistica_tb))
 
+
 }

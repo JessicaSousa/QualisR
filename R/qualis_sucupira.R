@@ -25,60 +25,63 @@
 #' estatistica_tb <- get_qualis_table(sucupira_get = sucupira_pg, area = 'estatística')
 #' print(head(estatistica_tb))
 #'
-get_qualis_table <- function (sucupira_get, area = "",
-                              event = "2013-2016"){
+#'
+get_qualis_table <- function(sucupira_get, area = "", event = "2013-2016"){
 
-  select_option <- function(options, key) as.integer(dplyr::filter(options,
-                      grepl(key, options$name, ignore.case = TRUE))[1, 1])
+  select_option <- function(options, key)
+    as.integer(dplyr::filter(options,
+                             grepl(key, options$name, ignore.case = TRUE))[1, 1])
 
-  #Obter ViewState da Página do Sucupira
-  viewstate <- sucupira_get %>% xml2::read_html() %>%
+  #Obter opções de evento e área para construir  a busca
+  cod_event <- select_option(get_options(sucupira_get,
+                                         form = "evento"), key = event)
+  #Obtém viewstate da página
+  viewstate <- sucupira_get %>%
+    xml2::read_html() %>%
     rvest::html_node(xpath = "//*[@id=\"javax.faces.ViewState\"]") %>%
     rvest::html_attr("value")
 
   # Preencher formulário para busca
-  params <- list(form = "form",
-                 `form:issn:issn` = "",
-                 `form:j_idt52` = "",
-                 `form:estrato` = "",
-                 `form:consultar` = "Consultar",
-                 javax.faces.ViewState = viewstate)
+  params <- list(
+    'form' = 'form',
+    'form:evento'= cod_event,
+    'form:estrato' = 0,
+    'form:consultar' = 'Consultar',
+    'javax.faces.ViewState' = viewstate
+  )
 
-  #Obter opções de evento e área para construir  a busca
-  event_selected <- select_option(get_options(sucupira_get,
-                                              form = "evento"), key = event)
-  area_selected <- select_option(get_options(sucupira_get,
-                                             form = "area"), key = area)
-
-  query <- data.frame(cod_event = event_selected, cod_area = area_selected)
-
-
-  #Se existir algum NA retorna nada
-  if (sum(is.na(query)))
-    return()
-
-  params$`form:evento` <- query$cod_event
 
   if(area != ""){
+    cod_area <- select_option(get_options(sucupira_get,
+                                          form = "area"),
+                              key = area)
+    if(is.na(cod_area))
+      stop('The area does not exist in the table!')
     params$`form:checkArea` <- "on"
-    params$`form:area` <- query$cod_area
-    params$`form:j_idt558` <- "form:j_idt558"
-
-  }else{
-    params$`form:j_idt563` <- "form:j_idt563"
+    params$`form:area` <- cod_area
   }
 
-  # Faz consulta no site do sucupira
-  httr::POST(sucupira_get$url, body = params)
+  #Faz consulta no site do sucupira
+  response <- httr::POST(sucupira_get$url, body = params)
 
-  # Realiza nova requisição para fazer download do xls
   params$`form:consultar` <- NULL
-  request <- httr::POST(sucupira_get$url, body = params)
 
-  text <- readr::read_file(httr::content(request, as = "text",
-                                         encoding = "latin1"))
-  read.table(text = text, header = TRUE, sep = "\t")
+  if(area != ''){
+    params$`form:j_idt560` =	'form:j_idt560'
+  }
+  else{
+    params$`form:j_idt568` <- "form:j_idt568"
+  }
+
+  response <- httr::POST(response$url, body = params)
+
+  xls_file <- response %>%
+    httr::content('text', encoding = "latin1") %>%
+    readr::read_file()
+    read.table(text = xls_file, header = TRUE, sep = "\t")
+
 }
+
 
 
 #' #' get_all_tables

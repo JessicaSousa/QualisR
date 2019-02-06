@@ -21,8 +21,8 @@ A função `QualisR::get_qualis_table` permite que você obtenha a tabela do sit
 sucupira_get <- QualisR::get_sucupira_page()
 print(sucupira_get$status_code)
 
-#Obtém a tabela de periódicos dos cursos no triênio 2010-2012
-tabela <- QualisR::get_qualis_table(sucupira_get, event = '2010-2012')
+#Obtém a tabela de periódicos do curso de estatística no triênio 2010-2012
+tabela <- QualisR::get_qualis_table(sucupira_get,area = "estatística", event = '2010-2012')
 
 head(tabela)
 ```
