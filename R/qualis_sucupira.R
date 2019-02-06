@@ -20,8 +20,8 @@
 #' @examples
 #'
 #' sucupira_pg <- get_sucupira_page()
-#' todos_cursos_tb <- get_qualis_table(sucupira_pg)
-#' print(head(todos_cursos_tb))
+#' #todos_cursos_tb <- get_qualis_table(sucupira_pg)
+#' #print(head(todos_cursos_tb))
 #' estatistica_tb <- get_qualis_table(sucupira_get = sucupira_pg, area = 'estatística')
 #' print(head(estatistica_tb))
 #'
@@ -78,7 +78,7 @@ get_qualis_table <- function(sucupira_get, area = "", event = "2013-2016"){
   xls_file <- response %>%
     httr::content('text', encoding = "latin1") %>%
     readr::read_file()
-    read.table(text = xls_file, header = TRUE, sep = "\t")
+  read.table(text = xls_file, header = TRUE, sep = "\t")
 
 }
 

@@ -6,7 +6,7 @@ Authors@R: person("Jessica", "Cardoso", email = "jessicacardosops@gmail.com",
 Description: Permite a recuperação das tabelas de periódicos,
     presentes do site Sucupira (http://sucupira.capes.gov.br)
     através do nome da área do periódico.
-Depends: R (>= 3.4.2)
+Depends: R (>= 3.5.0)
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true

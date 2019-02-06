@@ -24,8 +24,8 @@ evento e a área desejada
 \examples{
 
 sucupira_pg <- get_sucupira_page()
-todos_cursos_tb <- get_qualis_table(sucupira_pg)
-print(head(todos_cursos_tb))
+#todos_cursos_tb <- get_qualis_table(sucupira_pg)
+#print(head(todos_cursos_tb))
 estatistica_tb <- get_qualis_table(sucupira_get = sucupira_pg, area = 'estatística')
 print(head(estatistica_tb))
 
