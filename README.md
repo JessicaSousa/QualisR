@@ -28,4 +28,4 @@ head(tabela)
 ```
 
 #### Outros exemplos
-Veja mais coisas que você pode fazer no [Tutorial](https://jessicasousa.github.io/QualisR/doc/README.html)
+Veja mais coisas que você pode fazer no [Tutorial](https://jessicasousa.github.io/QualisR/docs/README.html)
